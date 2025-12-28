@@ -21,3 +21,49 @@ alias dfh='df -h'
 
 # Editor
 export EDITOR=vim
+
+
+
+# ==============================
+# Helper Functions
+# ==============================
+
+# Quick jump
+mcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+# Safe move with progress
+mvf() {
+  rsync -ah --progress "$1" "$2"
+}
+
+# Jellyfin logs (works everywhere you run it)
+jflogs() {
+  docker logs jellyfin --tail 100 -f
+}
+
+# Go to media dirs (uses local vars safely)
+media() { cd "$MEDIA_ROOT" || return; }
+tv()    { cd "$MEDIA_ROOT/TV" || return; }
+movies(){ cd "$MEDIA_ROOT/Movies" || return; }
+
+
+# ==============================
+# Environment Detection
+# ==============================
+
+# SSH indicator
+if [[ -n "$SSH_CONNECTION" ]]; then
+  export PS1="[SSH] $PS1"
+fi
+
+# Proxmox host detect
+if [[ -f /etc/pve/.version ]]; then
+  export PS1="[PVE] $PS1"
+fi
+
+# Container detect
+if grep -qa docker /proc/1/cgroup 2>/dev/null; then
+  export PS1="[CT] $PS1"
+fi
