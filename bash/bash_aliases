@@ -1,0 +1,4 @@
+# Shared aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias cls='clear'

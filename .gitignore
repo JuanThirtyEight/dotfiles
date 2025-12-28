@@ -1,14 +1,6 @@
-# Compiled Python files
-*.pyc
-
-# Folder view configuration files
+# General
 .DS_Store
-Desktop.ini
+node_modules
 
-# Thumbnail cache files
-._*
-Thumbs.db
-
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes
+# Local bash config (DO NOT COMMIT)
+bash/bashrc.local
